@@ -1,16 +1,18 @@
-import express, { Router } from 'express'
-import { getPosts, makePost } from './controllers/post.controller'
+import express, { Router } from "express";
+import cors from "cors";
+import { getPosts, makePost } from "./controllers/post.controller.js";
 
-const app = express()
+const app = express();
+app.use(cors());
+app.use(express.json());
 
-const router = Router()
+const router = Router();
+app.use("/posts", router);
 
-router.get('/', getPosts)
-router.post('/', makePost)
+router.get("/", getPosts);
+router.post("/", makePost);
 
-app.use('/posts', router)
-
-const PORT = 8080
+const PORT = 8080;
 app.listen(PORT, () => {
-  console.log(`🍕🚀🎈 Server running on http://localhost:${PORT}/`)
-})
+  console.log(`🍕🚀🎈 Server running on http://localhost:${PORT}/`);
+});
