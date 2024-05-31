@@ -1,16 +1,17 @@
-import React, { useState } from 'react'
+import React, { useState } from "react";
 
 const Login = ({ user, setUser }) => {
-  const [data, setData] = useState('')
+  const [data, setData] = useState("");
 
   const handleChange = (e) => {
-    setData(e.target.value)
-  }
+    setData(e.target.value);
+  };
 
   const handleSubmit = (e) => {
-    e.preventDefault()
-    setUser(data)
-  }
+    e.preventDefault();
+    localStorage.setItem("user", data);
+    setUser(data);
+  };
 
   return (
     <div>
@@ -30,7 +31,7 @@ const Login = ({ user, setUser }) => {
         </button>
       </form>
     </div>
-  )
-}
+  );
+};
 
-export default Login
+export default Login;
