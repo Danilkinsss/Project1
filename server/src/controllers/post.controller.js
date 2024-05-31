@@ -1,10 +1,14 @@
-import { posts } from "../models/data.js";
+import { createPost, getAll } from "../models/post.model.js";
 
-export function getPosts(req, res) {
-  res.send(posts);
+export async function getPosts(req, res) {
+  const data = await getAll()
+  const sortedData = data.sort((a,b) => {
+     return Number(new Date(b.postDate)) - Number(new Date(a.postDate))
+  })
+  res.send(sortedData);
 }
 
-export function makePost(req, res) {
+export async function makePost (req, res) {
   const { text, author } = req.body;
 
   if (!text || text.length > 250) {
@@ -13,13 +17,11 @@ export function makePost(req, res) {
   }
 
   const newPost = {
-    id: posts.length,
     text,
-    author,
-    postDate: new Date(),
+    author
   };
 
-  posts.unshift(newPost);
+  await createPost(newPost)
 
   res.status(201).json({ msg: "Posted successfully" });
 }

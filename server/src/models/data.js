@@ -1,4 +1,4 @@
-const posts = [
+export const posts = [
   {
     id: 0,
     text: "Free tip: I don't own a stove, oven, or microwave, because revenge is a dish best served cold.",

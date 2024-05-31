@@ -40,11 +40,13 @@ function App() {
     setText("");
   };
 
+  const bgColor = ((250-text.length) > 0 && (250-text.length) < 20) ? "bg-orange-400 text-white" : (250-text.length) <= 0 ? "bg-red-500 text-white" : ""
+
   return (
     <div className="min-h-screen gap-4 flex flex-col bg-gray-100">
-      <header className="bg-white mx-20 py-4 gap-4 flex flex-col px-8">
+      <header className="bg-white mx-20 py-4 gap-4 flex flex-col px-8 ">
         <h1 className="text-2xl font-bold">Home</h1>
-        <form onSubmit={handleSubmit} className="flex gap-4">
+        <form onSubmit={handleSubmit} className="flex gap-4 items-center">
           <input
             type="text"
             value={text}
@@ -52,9 +54,10 @@ function App() {
             className="border w-full p-2 rounded-md"
             placeholder="Write something..."
           />
+          <div className={`border rounded-full w-8 h-8 flex justify-center items-center text-[10px] p-2 ${bgColor}`}>{250 - text.length}</div>
           <button
             type="submit"
-            className="bg-blue-600 text-white px-4 rounded-full"
+            className="bg-blue-600 text-white px-4 rounded-full py-2"
           >
             Post
           </button>
